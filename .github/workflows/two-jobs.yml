@@ -1,26 +1,24 @@
-name: tow jobs
+name: two-jobs
 
-on: push
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+  workflow_dispatch:
 
 jobs:
-        JobLinux:
-                name: Job Linux
-                runs-on: ubuntu-latest
-                streps:
-                        - name: Etapa 01
-                        - uses: actions/checkout@v4
-                        - name: Etapa 02
-                          run:
-                                  echo "$(cat REDME.md)"
-                                  uname -a
-         JobWindows:
-                 name: Job Windowns
-                 runs-on: Widows-latest
-                 streps:
-                        - name:Etapa 04
-                        - uses: actions/checkout@v4
-                        - name: Etapa 04
-                        run:
-                               echo "$(cat REDME.md)"
-                                  uname -a
-                       
+  job-linux:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run a simple script Hello Word!
+        run: echo Hello, world!
+
+  job-windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run a simple script to check operation system!
+        run: Get-CimInstance Win32_OperatingSystem
